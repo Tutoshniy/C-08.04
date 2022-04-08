@@ -36,12 +36,13 @@ if (n == k)
     PrintArray(matrix);
     for (int i = 0; i < n; i++)
     {
-        for (int j = 0; j < k; j++)
+        for (int j = i; j < k; j++)
         {
-            temp = matrix[i, j];
+            int temp = matrix[i, j];
             matrix[i, j] = matrix [j, i];
             matrix[j, i] = temp;
         }
+        
     }
     Console.WriteLine();
     Console.WriteLine("Получившийся массив: ");
