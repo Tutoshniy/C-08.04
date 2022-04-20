@@ -2,50 +2,60 @@
 Console.WriteLine("Введите длину массива:" );
 int v = Convert.ToInt32(Console.ReadLine());
 Console.WriteLine("Введите высоту массива:" );
-int n = Convert.ToInt32(Console.ReadLine());
-Console.WriteLine("Введите ширину массива:" );
 int k = Convert.ToInt32(Console.ReadLine());
-int [,] matrix = new int [n,v];
+Console.WriteLine("Введите ширину массива:" );
+int n = Convert.ToInt32(Console.ReadLine());
+int [,,] matrix = new int [n,v,k];
 
-int findSame (int [,] mat)
+int findSame (int [,,] mat)
 {
     int a = new Random().Next(10,99);
-    for (int i = 0; i < n; i++)
+    for (int i = 0; i < mat.GetLength(0); i++)
     {
-        for (int j = 0; j < v; j++)
+        for (int j = 0; j < mat.GetLength(1); j++)
         {
-            if (mat[i, j] == a) { a++; };
+            for(int k = 0; k < mat.GetLength(2); k++)
+            {
+                if (mat[i, j, k] == a) { a++; };
+
+            }
         }
     }
     return a;
 }
 
-void FillArray(int [,] mat)
+void FillArray(int [,,] mat)
 {
     for (int i = 0; i < mat.GetLength(0); i++)
     {
         for (int j = 0; j < mat.GetLength(1); j++)
         {
-            mat[i,j] = findSame(matrix);
+            for(int k = 0; k < mat.GetLength(2); k++)
+            {
+                mat[i,j,k] = findSame(matrix);
+            }
+
         }
     }
 }
 
-void PrintArray(int [,] mat)
+void PrintArray(int [,,] mat)
 {
     for (int i = 0; i < mat.GetLength(0); i++)
     {
         for (int j = 0; j < mat.GetLength(1); j++)
         {
-            Console.Write($"{mat[i,j]} ");
+            for(int k = 0; k < mat.GetLength(2); k++)
+            {
+                Console.Write($"{mat[i,j,k]} ");
+            }
+            Console.WriteLine();
         }
 
         Console.WriteLine();
     }
     Console.WriteLine();
 }
-for (int i = 0; i < k; i++)
-{
-    FillArray(matrix);
-    PrintArray(matrix);
-}
+
+FillArray(matrix);
+PrintArray(matrix);
